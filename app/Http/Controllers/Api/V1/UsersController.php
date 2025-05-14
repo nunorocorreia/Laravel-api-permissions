@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Policies\Api\V1\UserPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Auth\Access\AuthorizationException;
 
 class UsersController extends ApiController
@@ -29,7 +29,14 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
-        //
+
+        try {
+            $this->isAble('show', $user);
+        } catch (AuthorizationException) {
+            return $this->error('You are not authorized to do this request', 401);
+        }
+
+        return new UserResource($user);
     }
 
 

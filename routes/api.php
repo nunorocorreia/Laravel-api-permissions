@@ -22,6 +22,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->get('/users', [UsersController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/users/{user}', [UsersController::class, 'show']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
