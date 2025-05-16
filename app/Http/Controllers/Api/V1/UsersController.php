@@ -29,7 +29,6 @@ class UsersController extends ApiController
      */
     public function show(User $user)
     {
-
         try {
             $this->isAble('show', $user);
         } catch (AuthorizationException) {
